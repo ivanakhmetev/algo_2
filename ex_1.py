@@ -51,10 +51,11 @@ class SimpleTree:
 
     def LeafCount(self):
         # количество листьев в дереве
-        leaf_count = 0
         nodes = self.Root.Children
+        if len(nodes) == 0:
+            return 1
         if len(nodes) > 0:
-            leaf_count = self._LeafCount(leaf_count, nodes)
+            leaf_count = self._LeafCount(0, nodes)
         return leaf_count
     
     def _LeafCount(self, leaf_count: int, nodes: list):

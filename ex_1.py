@@ -11,7 +11,7 @@ class SimpleTree:
         self.Root = root # корень, может быть None
 	
     def AddChild(self, ParentNode, NewChild):
-        node = SimpleTreeNode(NewChild, ParentNode)
+        # node = SimpleTreeNode(NewChild, ParentNode)
         ParentNode.Children.append(NewChild)
 
         # pass # ваш код добавления нового дочернего узла существующему ParentNode
@@ -20,8 +20,22 @@ class SimpleTree:
         pass # ваш код удаления существующего узла NodeToDelete
 
     def GetAllNodes(self):
-        # ваш код выдачи всех узлов дерева в определённом порядке
-        return []
+        all_nodes = [self.Root]
+        nodes = self.Root.Children
+        if len(nodes) > 0:
+            all_nodes.extend(nodes)
+            all_nodes = self._GetAllNodes(all_nodes, nodes)
+        return all_nodes
+    
+    def _GetAllNodes(self, all_nodes: int, nodes: list):
+        for n in nodes:
+            num_children = len(n.Children)
+            if num_children > 0:
+                all_nodes.extend(n.Children)
+                all_nodes = self._GetAllNodes(all_nodes, n.Children)
+        return all_nodes
+
+
 
     def FindNodesByValue(self, val):
         # ваш код поиска узлов по значению

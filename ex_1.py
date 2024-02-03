@@ -19,7 +19,9 @@ class SimpleTree:
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
-        NodeToDelete.Parent.Children.remove(NodeToDelete)
+        parent = NodeToDelete.Parent
+        if parent:
+            NodeToDelete.Parent.Children.remove(NodeToDelete)
         NodeToDelete = None
         # pass # ваш код удаления существующего узла NodeToDelete
 

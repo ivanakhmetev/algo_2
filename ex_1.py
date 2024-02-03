@@ -26,6 +26,8 @@ class SimpleTree:
             NodeToDelete.Parent.Children.remove(NodeToDelete)
             # NodeToDelete.Parent = None
             self._DeleteNode(NodeToDelete)
+        del NodeToDelete.Children[:]
+        del NodeToDelete
 
     def _DeleteNode(self, node):
         if len(node.Children) == 0:
@@ -33,6 +35,8 @@ class SimpleTree:
             return
         for n in node.Children:
             self._DeleteNode(n)
+            node.Parent = None
+        
 
 
 

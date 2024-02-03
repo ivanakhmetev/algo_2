@@ -19,13 +19,14 @@ class SimpleTree:
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
-        NodeToDelete.Parent.Children.remove(NodeToDelete)
-        NodeToDelete.Parent = None
+        if NodeToDelete:
+            NodeToDelete.Parent.Children.remove(NodeToDelete)
+            NodeToDelete.Parent = None
         self._DeleteNode(NodeToDelete)
 
     def _DeleteNode(self, node):
         if len(node.Children) == 0:
-            del node
+            node = None
             return
         for n in node.Children:
             self._DeleteNode(n)

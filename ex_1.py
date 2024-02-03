@@ -53,9 +53,8 @@ class SimpleTree:
         return found
    
     def MoveNode(self, OriginalNode, NewParent):
-        # ваш код перемещения узла вместе с его поддеревом -- 
-        # в качестве дочернего для узла NewParent
-        pass  
+        OriginalNode.Parent.Children.remove(OriginalNode)
+        self.AddChild(NewParent, OriginalNode)
    
     def Count(self):
         # количество всех узлов в дереве

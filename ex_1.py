@@ -37,9 +37,9 @@ class SimpleTree:
             node = None
             return
         for n in node.Children:
-            node.Parent.Children.remove(node)
             node.Parent = None
             self._DeleteNode(n)
+        node = None
 
         
 

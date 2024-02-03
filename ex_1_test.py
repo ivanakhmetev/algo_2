@@ -24,6 +24,7 @@ r2.Children.append(r3)
 my_tree = SimpleTree(root)
 # print(my_tree.LeafCount())
 # print(my_tree.Count())
-a = my_tree.GetAllNodes()
-for el in a:
-    print (el.NodeValue)
+# a = my_tree.GetAllNodes()
+# for el in a:
+#     print (el.NodeValue)
+print(my_tree.FindNodesByValue(7)[0].NodeValue)

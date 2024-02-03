@@ -11,8 +11,8 @@ class SimpleTree:
         self.Root = root # корень, может быть None
 	
     def AddChild(self, ParentNode, NewChild):
-        # node = SimpleTreeNode(NewChild, ParentNode)
         ParentNode.Children.append(NewChild)
+        NewChild.parent = ParentNode
 
         # pass # ваш код добавления нового дочернего узла существующему ParentNode
   
@@ -39,7 +39,18 @@ class SimpleTree:
 
     def FindNodesByValue(self, val):
         # ваш код поиска узлов по значению
-        return []
+        found = []
+        found = self._FindNodesByValue(found, [self.Root], val)
+        return found
+    
+    def _FindNodesByValue(self, found, nodes, val):
+        for n in nodes:
+            if n.NodeValue == val:
+                found.append(n)
+        for n in nodes:
+            if len(n.Children) != 0:
+                self._FindNodesByValue(found, n.Children, val)            
+        return found
    
     def MoveNode(self, OriginalNode, NewParent):
         # ваш код перемещения узла вместе с его поддеревом -- 

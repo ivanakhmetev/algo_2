@@ -22,6 +22,7 @@ class SimpleTree:
         parent = NodeToDelete.Parent
         if parent:
             NodeToDelete.Parent.Children.remove(NodeToDelete)
+            NodeToDelete.Parent = None
         del NodeToDelete
         # pass # ваш код удаления существующего узла NodeToDelete
 

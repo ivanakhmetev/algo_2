@@ -19,9 +19,12 @@ class SimpleTree:
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
+        all_nodes = self.GetAllNodes()
+        if NodeToDelete not in all_nodes:
+            return
         if NodeToDelete:
             NodeToDelete.Parent.Children.remove(NodeToDelete)
-            NodeToDelete.Parent = None
+            # NodeToDelete.Parent = None
             self._DeleteNode(NodeToDelete)
 
     def _DeleteNode(self, node):

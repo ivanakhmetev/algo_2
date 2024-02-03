@@ -16,6 +16,28 @@ class SimpleTree:
 
         # pass # ваш код добавления нового дочернего узла существующему ParentNode
   
+    # def DeleteNode(self, NodeToDelete):
+    #     if NodeToDelete == self.Root:
+    #         return
+
+    #     all_nodes = self.GetAllNodes()
+    #     if NodeToDelete not in all_nodes:
+    #         return
+
+    #     parent = NodeToDelete.Parent
+    #     parent.Children.remove(NodeToDelete)
+    #     self._DeleteNode(NodeToDelete)
+
+    # def _DeleteNode(self, node):
+    #     if len(node.Children) == 0:
+    #         return
+
+    #     for child in node.Children.copy():  # используем копию, чтобы избежать изменений во время итерации
+    #         child.Parent = None
+    #         self._DeleteNode(child)
+
+    #     del node.Children[:]
+
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
@@ -29,16 +51,13 @@ class SimpleTree:
         self._DeleteNode(NodeToDelete)
 
     def _DeleteNode(self, node):
-        if len(node.Children) == 0:
+        if not node:
             return
 
-        for child in node.Children.copy():  # используем копию, чтобы избежать изменений во время итерации
-            child.Parent = None
+        for child in node.Children.copy():
             self._DeleteNode(child)
 
-        del node.Children[:]
-
-        
+        node = None
 
 
 

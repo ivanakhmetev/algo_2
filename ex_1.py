@@ -19,15 +19,18 @@ class SimpleTree:
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
-        parent = NodeToDelete.Parent
-        if parent:
+        if NodeToDelete.Parent:
             NodeToDelete.Parent.Children.remove(NodeToDelete)
-            NodeToDelete.Parent = None
-        for child in NodeToDelete.Children:
-            child.Parent = None
-        del NodeToDelete.Children[:]
-        del NodeToDelete
-        # pass # ваш код удаления существующего узла NodeToDelete
+        self._DeleteNode(NodeToDelete)
+
+    def _DeleteNode(self, node):
+        if len(node.Children) == 0:
+            del node
+            return
+        for n in node.Children:
+            self._DeleteNode(n)
+
+
 
     def GetAllNodes(self):
         all_nodes = [self.Root]

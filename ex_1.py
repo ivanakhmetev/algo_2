@@ -45,6 +45,9 @@ class SimpleTree:
         all_nodes = self.GetAllNodes()
         if NodeToDelete not in all_nodes:
             return
+        if len(NodeToDelete.Children) == 0:
+            return
+
 
         parent = NodeToDelete.Parent
         parent.Children.remove(NodeToDelete)

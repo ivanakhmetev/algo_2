@@ -17,6 +17,9 @@ class SimpleTree:
         # pass # ваш код добавления нового дочернего узла существующему ParentNode
   
     def DeleteNode(self, NodeToDelete):
+        if NodeToDelete == self.Root:
+            self.Root = None
+            return
         NodeToDelete.Parent.Children.remove(NodeToDelete)
         # pass # ваш код удаления существующего узла NodeToDelete
 

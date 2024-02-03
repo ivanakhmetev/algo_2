@@ -19,27 +19,24 @@ class SimpleTree:
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
+
         all_nodes = self.GetAllNodes()
         if NodeToDelete not in all_nodes:
             return
-        if NodeToDelete:
-            NodeToDelete.Parent.Children.remove(NodeToDelete)
-            # NodeToDelete.Parent = None
-            self._DeleteNode(NodeToDelete)
-            NodeToDelete.Parent = None
-            del NodeToDelete.Children[:]
-            del NodeToDelete
-        NodeToDelete = None
 
+        parent = NodeToDelete.Parent
+        parent.Children.remove(NodeToDelete)
+        self._DeleteNode(NodeToDelete)
 
     def _DeleteNode(self, node):
         if len(node.Children) == 0:
-            node = None
             return
-        for n in node.Children:
-            node.Parent = None
-            self._DeleteNode(n)
-        node = None
+
+        for child in node.Children.copy():  # используем копию, чтобы избежать изменений во время итерации
+            child.Parent = None
+            self._DeleteNode(child)
+
+        del node.Children[:]
 
         
 

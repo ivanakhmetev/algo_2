@@ -97,5 +97,3 @@ class SimpleTree:
         return leaf_count
             
             
-
-

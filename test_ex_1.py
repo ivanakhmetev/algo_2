@@ -39,4 +39,3 @@ def test_delete_node():
     assert [el.NodeValue for el in tree.Root.Children] == [ 17]
     tree.DeleteNode(tree.Root.Children[0])
     assert [el.NodeValue for el in tree.Root.Children] == []
-

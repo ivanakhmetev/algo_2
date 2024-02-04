@@ -41,3 +41,34 @@ def test_delete_node():
     assert [el.NodeValue for el in tree.Root.Children] == [ 17]
     tree.DeleteNode(tree.Root.Children[0])
     assert [el.NodeValue for el in tree.Root.Children] == []
+
+def test_get_all_nodes():
+    tree = init_tree()
+    nodes = tree.GetAllNodes()
+    l1 = sorted([el.NodeValue for el in nodes])
+    l2 = sorted([9, 4, 3, 6, 5, 7, 17, 22, 20])
+    assert l1 == l2
+
+def test_get_nodes_by_value():
+
+    tree = init_tree()
+    nodes_by_7 = tree.FindNodesByValue(7)
+    assert [el.NodeValue for el in nodes_by_7] == [7]
+
+def test_move_node():
+    tree = init_tree()
+    tree.MoveNode(tree.Root.Children[0], tree.Root.Children[1])
+    l1 = sorted([el.NodeValue for el in tree.Root.Children])
+    l2 = sorted([17])
+    l3 = sorted([22, 4])
+    l4 = sorted([el.NodeValue for el in tree.Root.Children[0].Children])
+    assert l1 == l2 
+    assert l3 == l4
+
+def test_count_nodes():
+    tree = init_tree()
+    assert tree.Count() == 9
+
+def test_count_leafs():
+    tree = init_tree()
+    assert tree.LeafCount() == 4

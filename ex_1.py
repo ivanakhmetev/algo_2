@@ -1,67 +1,28 @@
+'''algo_2 ex_1 general tree implementation'''
+
 class SimpleTreeNode:
-	
+
     def __init__(self, val, parent):
-        self.NodeValue = val # значение в узле
-        self.Parent = parent # родитель или None для корня
-        self.Children = [] # список дочерних узлов
+        self.NodeValue = val
+        self.Parent = parent
+        self.Children = []
 	
 class SimpleTree:
 
     def __init__(self, root):
-        self.Root = root # корень, может быть None
+        self.Root = root
 	
     def AddChild(self, ParentNode, NewChild):
         ParentNode.Children.append(NewChild)
-        NewChild.parent = ParentNode
-
-        # pass # ваш код добавления нового дочернего узла существующему ParentNode
-  
-    # def DeleteNode(self, NodeToDelete):
-    #     if NodeToDelete == self.Root:
-    #         return
-
-    #     all_nodes = self.GetAllNodes()
-    #     if NodeToDelete not in all_nodes:
-    #         return
-
-    #     parent = NodeToDelete.Parent
-    #     parent.Children.remove(NodeToDelete)
-    #     self._DeleteNode(NodeToDelete)
-
-    # def _DeleteNode(self, node):
-    #     if len(node.Children) == 0:
-    #         return
-
-    #     for child in node.Children.copy():  # используем копию, чтобы избежать изменений во время итерации
-    #         child.Parent = None
-    #         self._DeleteNode(child)
-
-    #     del node.Children[:]
 
     def DeleteNode(self, NodeToDelete):
         if NodeToDelete == self.Root:
             return
-
-        all_nodes = self.GetAllNodes()
-        if NodeToDelete not in all_nodes:
-            return
-        if len(NodeToDelete.Children) == 0:
-            return
-
-
-        parent = NodeToDelete.Parent
-        parent.Children.remove(NodeToDelete)
-        self._DeleteNode(NodeToDelete)
-
-    def _DeleteNode(self, node):
-        if not node:
-            return
-
-        for child in node.Children.copy():
-            self._DeleteNode(child)
-
-        node = None
-
+        
+        del NodeToDelete.Children[:]
+        node_idx = NodeToDelete.Parent.Children.index(NodeToDelete)
+        del NodeToDelete.Parent.Children[node_idx]
+        return
 
 
     def GetAllNodes(self):

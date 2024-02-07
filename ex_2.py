@@ -66,4 +66,14 @@ class BST:
         return False # если узел не найден
 
     def Count(self):
-        return 0 # количество узлов в дереве
+        if self.Root is None:
+            return 0
+        return self._Count(self.Root, 1)
+        
+    
+    def _Count(self, node, count):
+        if node.LeftChild is not None:
+            count = self._Count(node.LeftChild, count + 1)
+        if node.RightChild is not None:
+            count = self._Count(node.RightChild, count + 1)
+        return count

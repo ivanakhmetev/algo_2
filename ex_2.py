@@ -82,8 +82,101 @@ class BST:
 
 	
     def DeleteNodeByKey(self, key):
-        # удаляем узел по ключу
-        return False # если узел не найден
+        find = self.FindNodeByKey(key)
+        if find.NodeHasKey is False:
+            return False
+        node = find.Node
+        if node == self.Root and self.IsLeaf(node):
+            self.Root = None
+            return True
+        if node == self.Root and self.HasSingleLeftChild(node):
+            self.Root = node.LeftChild
+            self.Root.Parent = None
+            return True
+        if node == self.Root and self.HasSingleRightChild(node):
+            self.Root = node.RightChild
+            self.Root.Parent = None
+            return True
+        if node == self.Root and self.HasBothChilds(node):
+            min_find = self.FinMinMax(node.RightChild, False)
+            if self.IsLeaf(min_find.Node):
+                self.Root = min_find.Node
+                self.Root.Parent = None
+                return True
+            if self.HasSingleRightChild(min_find.Node):
+                min_find.Node.Parent.LeftChild = min_find.Node.RightChild
+                self.Root = min_find.Node
+                self.Root.Parent = None
+                return True
+                        
+        if self.IsLeaf(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = None
+            return True
+        if self.IsLeaf(node) and self.IsRightChild(node):
+            node.Parent.RightChild = None
+            return True
+        if self.HasSingleLeftChild(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = node.LeftChild
+            return True
+        if self.HasSingleLeftChild(node) and self.IsRightChild(node):
+            node.Parent.RightChild = node.LeftChild
+            return True
+        if self.HasSingleRightChild(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = node.RightChild
+            return True
+        if self.HasSingleRightChild(node) and self.IsRightChild(node):
+            node.Parent.RightChild = node.RightChild
+            return True
+
+        min_find = self.FinMinMax(node.RightChild, False)
+        if self.IsLeaf(min_find.Node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find.Node
+            return True
+        if self.IsLeaf(min_find.Node) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find.Node
+            return True
+        if self.HasSingleRightChild(min_find.Node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find.Node
+            min_find.Node.Parent.LeftChild = min_find.Node.RightChild
+            return True
+        if self.HasSingleRightChild(min_find.Node) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find.Node
+            min_find.Node.Parent.LeftChild = min_find.Node.RightChild
+            return True
+
+
+    def IsLeftChild(self, node):
+        if node.Parent is not None and node.Parent.LeftChild == node:
+            return True
+        return False
+    
+    def IsRightChild(self, node):
+        if node.Parent is not None and node.Parent.RightChild == node:
+            return True
+        return False
+
+
+    def IsLeaf(self, node):
+        if node.LeftChild is None and node.RightChild is None:
+            return True
+        return False
+    
+    def HasBothChilds(self, node):
+        if node.LeftChild is not None and node.RightChild is not None:
+            return True
+        return False
+
+    
+    def HasSingleLeftChild(self, node):
+        if node.LeftChild is not None and node.RightChild is None:
+            return True
+        return False
+    
+    def HasSingleRightChild(self, node):
+        if node.LeftChild is None and node.RightChild is not None:
+            return True
+        return False
+
 
     def Count(self):
         if self.Root is None:

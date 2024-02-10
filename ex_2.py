@@ -60,6 +60,8 @@ class BST:
   
     def FinMinMax(self, FromNode, FindMax):
         # return self._FindMin2(FromNode, FindMax)
+        if FromNode is None:
+            return BSTFind()
         if FindMax is True:
             return self._FindMax(FromNode)
         if FindMax is False:

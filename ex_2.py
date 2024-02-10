@@ -58,14 +58,14 @@ class BST:
             find.Node.RightChild = BSTNode(key, val, find.Node)
             return True
   
-    def FinMinMax(self, FromNode, FindMax):
-        # return self._FindMin2(FromNode, FindMax)
-        if FromNode is None:
-            return BSTFind()
-        if FindMax is True:
-            return self._FindMax(FromNode)
-        if FindMax is False:
-            return self._FindMin(FromNode)
+    # def FinMinMax(self, FromNode, FindMax):
+    #     # return self._FindMin2(FromNode, FindMax)
+    #     if FromNode is None:
+    #         return BSTFind()
+    #     if FindMax is True:
+    #         return self._FindMax(FromNode)
+    #     if FindMax is False:
+    #         return self._FindMin(FromNode)
         
 
     def _FindMin2(self, node, FindMax):
@@ -82,26 +82,51 @@ class BST:
         if node.RightChild is None and FindMax is True:
             return self._FindMin2(node.LeftChild, FindMax)
     
+    # def _FindMin(self, node):
+    #     if node.LeftChild is not None:# and node.RightChild is not None and node.LeftChild.NodeValue < node.RightChild.NodeValue:
+    #         return self._FindMin(node.LeftChild)
+    #     # if node.LeftChild is None and node.RightChild is not None:
+    #     #     return self._FindMin(node.RightChild)
+    #     find = BSTFind()
+    #     if node is not None:
+    #         find.Node = node
+    #         find.NodeHasKey = True
+    #     return find
+
+    # def _FindMax(self, node):
+    #     if node.RightChild is not None:
+    #         return self._FindMax(node.RightChild)
+    #     # if node.RightChild is None and node.LeftChild is not None: 
+    #     #     return self._FindMax(node.LeftChild)
+    #     find = BSTFind()
+    #     if node is not None:
+    #         find.Node = node
+    #         find.NodeHasKey = True
+    #     return find
+
+    def FinMinMax(self, FromNode, FindMax):
+        if FromNode is None:
+            return BSTFind()  # Возвращаем пустой результат поиска
+
+        if FindMax:
+            return self._FindMax(FromNode)
+        else:
+            return self._FindMin(FromNode)
+
     def _FindMin(self, node):
-        if node.LeftChild is not None:# and node.RightChild is not None and node.LeftChild.NodeValue < node.RightChild.NodeValue:
+        if node.LeftChild is not None:
             return self._FindMin(node.LeftChild)
-        # if node.LeftChild is None and node.RightChild is not None:
-        #     return self._FindMin(node.RightChild)
         find = BSTFind()
-        if node is not None:
-            find.Node = node
-            find.NodeHasKey = True
+        find.Node = node
+        find.NodeHasKey = True
         return find
 
     def _FindMax(self, node):
         if node.RightChild is not None:
             return self._FindMax(node.RightChild)
-        # if node.RightChild is None and node.LeftChild is not None: 
-        #     return self._FindMax(node.LeftChild)
         find = BSTFind()
-        if node is not None:
-            find.Node = node
-            find.NodeHasKey = True
+        find.Node = node
+        find.NodeHasKey = True
         return find
 
 	

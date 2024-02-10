@@ -46,5 +46,17 @@ def test_count():
     tree = test_init()
     assert tree.Count() == 4
 
+def test_finminmax():
+    tree = test_init()
+    find = tree.FinMinMax(tree.Root, True)
+    assert find.Node.NodeKey == 8
+    find = tree.FinMinMax(tree.Root, False)
+    assert find.Node.NodeKey == 1
+    find = tree.FinMinMax(tree.Root.LeftChild, True)
+    assert find.Node.NodeKey == 4
+    find = tree.FinMinMax(tree.Root.LeftChild, False)
+    assert find.Node.NodeKey == 1
+
+
 
     

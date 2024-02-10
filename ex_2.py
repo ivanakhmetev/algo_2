@@ -66,7 +66,7 @@ class BST:
     
     def _FindMin(self, node):
         if node.LeftChild is not None:
-            self._FindMin(node.LeftChild)
+            return self._FindMin(node.LeftChild)
         find = BSTFind()
         if node is not None:
             find.Node = node
@@ -75,7 +75,7 @@ class BST:
 
     def _FindMax(self, node):
         if node.RightChild is not None:
-            self._FindMax(node.RightChild)
+            return self._FindMax(node.RightChild)
         find = BSTFind()
         if node is not None:
             find.Node = node

@@ -52,9 +52,20 @@ def test_finminmax():
     assert find.Node.NodeKey == 8
     find = tree.FinMinMax(tree.Root, False)
     assert find.Node.NodeKey == 1
+    tree.AddKeyValue(5, 'l1r')
+    find = tree.FinMinMax(tree.Root.LeftChild, True)
+    assert find.Node.NodeKey == 5
+    find = tree.FinMinMax(tree.Root.LeftChild, False)
+    assert find.Node.NodeKey == 1
+    tree.AddKeyValue(3, 'l1r')
+    find = tree.FinMinMax(tree.Root.LeftChild, True)
+    assert find.Node.NodeKey == 5
+    tree.DeleteNodeByKey(5)
     find = tree.FinMinMax(tree.Root.LeftChild, True)
     assert find.Node.NodeKey == 4
-    find = tree.FinMinMax(tree.Root.LeftChild, False)
+    find = tree.FinMinMax(tree.Root.LeftChild.LeftChild, True)
+    assert find.Node.NodeKey == 3
+    find = tree.FinMinMax(tree.Root.LeftChild.LeftChild, False)
     assert find.Node.NodeKey == 1
 
 

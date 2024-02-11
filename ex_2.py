@@ -119,6 +119,7 @@ class BST:
         find = BSTFind()
         find.Node = node
         find.NodeHasKey = True
+        find.ToLeft = True
         return find
 
     def _FindMax(self, node):
@@ -127,7 +128,7 @@ class BST:
         find = BSTFind()
         find.Node = node
         find.NodeHasKey = True
-        return find
+        return find 
 
 	
     def DeleteNodeByKey(self, key):

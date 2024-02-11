@@ -126,117 +126,117 @@ class BST:
         return node
 
 	
-    # def DeleteNodeByKey(self, key):
-    #     find = self.FindNodeByKey(key)
-    #     if find.NodeHasKey is False:
-    #         return False
-    #     node = find.Node
-    #     if node == self.Root and self.IsLeaf(node):
-    #         self.Root = None
-    #         return True
-    #     if node == self.Root and self.HasSingleLeftChild(node):
-    #         self.Root = node.LeftChild
-    #         self.Root.Parent = None
-    #         return True
-    #     if node == self.Root and self.HasSingleRightChild(node):
-    #         self.Root = node.RightChild
-    #         self.Root.Parent = None
-    #         return True
-    #     if node == self.Root and self.HasBothChilds(node):
-    #         min_find = self.FinMinMax(node.RightChild, False)
-    #         if self.IsLeaf(min_find):
-    #             self.Root = min_find
-    #             self.Root.Parent = None
-    #             return True
-    #         if self.HasSingleRightChild(min_find):
-    #             min_find.Parent.LeftChild = min_find.RightChild
-    #             self.Root = min_find
-    #             self.Root.Parent = None
-    #             return True
-                        
-    #     if self.IsLeaf(node) and self.IsLeftChild(node):
-    #         node.Parent.LeftChild = None
-    #         return True
-    #     if self.IsLeaf(node) and self.IsRightChild(node):
-    #         node.Parent.RightChild = None
-    #         return True
-    #     if self.HasSingleLeftChild(node) and self.IsLeftChild(node):
-    #         node.Parent.LeftChild = node.LeftChild
-    #         return True
-    #     if self.HasSingleLeftChild(node) and self.IsRightChild(node):
-    #         node.Parent.RightChild = node.LeftChild
-    #         return True
-    #     if self.HasSingleRightChild(node) and self.IsLeftChild(node):
-    #         node.Parent.LeftChild = node.RightChild
-    #         return True
-    #     if self.HasSingleRightChild(node) and self.IsRightChild(node):
-    #         node.Parent.RightChild = node.RightChild
-    #         return True
-
-    #     min_find = self.FinMinMax(node.RightChild, False)
-    #     if self.IsLeaf(min_find) and self.IsLeftChild(node):
-    #         node.Parent.LeftChild = min_find
-    #         return True
-    #     if self.IsLeaf(min_find) and self.IsRightChild(node):
-    #         node.Parent.RightChild = min_find
-    #         return True
-    #     if self.HasSingleRightChild(min_find) and self.IsLeftChild(node):
-    #         node.Parent.LeftChild = min_find
-    #         min_find.Parent.LeftChild = min_find.RightChild
-    #         return True
-    #     if self.HasSingleRightChild(min_find) and self.IsRightChild(node):
-    #         node.Parent.RightChild = min_find
-    #         min_find.Parent.LeftChild = min_find.RightChild
-    #         return True
-
     def DeleteNodeByKey(self, key):
         find = self.FindNodeByKey(key)
         if find.NodeHasKey is False:
             return False
-
         node = find.Node
-        parent = node.Parent
-
-        # Определяем, является ли узел листом
-        is_leaf = self.IsLeaf(node)
-
-        # Удаление корневого узла
-        if node == self.Root:
-            if is_leaf:
-                self.Root = None
-            elif self.HasSingleLeftChild(node):
-                self.Root = node.LeftChild
-                node.LeftChild.Parent = None
-            elif self.HasSingleRightChild(node):
-                self.Root = node.RightChild
-                node.RightChild.Parent = None
-            else:
-                min_find = self.FinMinMax(node.RightChild, False)
-                min_node = min_find.Node
-                if self.IsLeaf(min_node):
-                    min_node.Parent.LeftChild = None
-                else:
-                    min_node.Parent.LeftChild = min_node.RightChild
-                    min_node.RightChild.Parent = min_node.Parent
-                self.Root = min_node
-                min_node.Parent = None
+        if node == self.Root and self.IsLeaf(node):
+            self.Root = None
+            return True
+        if node == self.Root and self.HasSingleLeftChild(node):
+            self.Root = node.LeftChild
+            self.Root.Parent = None
+            return True
+        if node == self.Root and self.HasSingleRightChild(node):
+            self.Root = node.RightChild
+            self.Root.Parent = None
+            return True
+        if node == self.Root and self.HasBothChilds(node):
+            min_find = self.FinMinMax(node.RightChild, False)
+            if self.IsLeaf(min_find):
+                self.Root = min_find
+                self.Root.Parent = None
+                return True
+            if self.HasSingleRightChild(min_find):
+                min_find.Parent.LeftChild = min_find.RightChild
+                self.Root = min_find
+                self.Root.Parent = None
+                return True
+                        
+        if self.IsLeaf(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = None
+            return True
+        if self.IsLeaf(node) and self.IsRightChild(node):
+            node.Parent.RightChild = None
+            return True
+        if self.HasSingleLeftChild(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = node.LeftChild
+            return True
+        if self.HasSingleLeftChild(node) and self.IsRightChild(node):
+            node.Parent.RightChild = node.LeftChild
+            return True
+        if self.HasSingleRightChild(node) and self.IsLeftChild(node):
+            node.Parent.LeftChild = node.RightChild
+            return True
+        if self.HasSingleRightChild(node) and self.IsRightChild(node):
+            node.Parent.RightChild = node.RightChild
             return True
 
-        # Удаление узла, который не является корневым
-        if is_leaf:
-            if self.IsLeftChild(node):
-                parent.LeftChild = None
-            else:
-                parent.RightChild = None
-        elif self.HasSingleLeftChild(node):
-            if self.IsLeftChild(node):
-                parent.LeftChild = node.LeftChild
-            else:
-                parent.RightChild = node.LeftChild
-            node.LeftChild.Parent = parent
-        elif self.HasSingleRightChild(node):
-            if self.IsLeftChild(node):
-                parent.LeftChild
+        min_find = self.FinMinMax(node.RightChild, False)
+        if self.IsLeaf(min_find) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find
+            return True
+        if self.IsLeaf(min_find) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find
+            return True
+        if self.HasSingleRightChild(min_find) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find
+            min_find.Parent.LeftChild = min_find.RightChild
+            return True
+        if self.HasSingleRightChild(min_find) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find
+            min_find.Parent.LeftChild = min_find.RightChild
+            return True
+
+    # def DeleteNodeByKey(self, key):
+    #     find = self.FindNodeByKey(key)
+    #     if find.NodeHasKey is False:
+    #         return False
+
+    #     node = find.Node
+    #     parent = node.Parent
+
+    #     # Определяем, является ли узел листом
+    #     is_leaf = self.IsLeaf(node)
+
+    #     # Удаление корневого узла
+    #     if node == self.Root:
+    #         if is_leaf:
+    #             self.Root = None
+    #         elif self.HasSingleLeftChild(node):
+    #             self.Root = node.LeftChild
+    #             node.LeftChild.Parent = None
+    #         elif self.HasSingleRightChild(node):
+    #             self.Root = node.RightChild
+    #             node.RightChild.Parent = None
+    #         else:
+    #             min_find = self.FinMinMax(node.RightChild, False)
+    #             min_node = min_find.Node
+    #             if self.IsLeaf(min_node):
+    #                 min_node.Parent.LeftChild = None
+    #             else:
+    #                 min_node.Parent.LeftChild = min_node.RightChild
+    #                 min_node.RightChild.Parent = min_node.Parent
+    #             self.Root = min_node
+    #             min_node.Parent = None
+    #         return True
+
+    #     # Удаление узла, который не является корневым
+    #     if is_leaf:
+    #         if self.IsLeftChild(node):
+    #             parent.LeftChild = None
+    #         else:
+    #             parent.RightChild = None
+    #     elif self.HasSingleLeftChild(node):
+    #         if self.IsLeftChild(node):
+    #             parent.LeftChild = node.LeftChild
+    #         else:
+    #             parent.RightChild = node.LeftChild
+    #         node.LeftChild.Parent = parent
+    #     elif self.HasSingleRightChild(node):
+    #         if self.IsLeftChild(node):
+    #             parent.LeftChild
 
 
     def IsLeftChild(self, node):

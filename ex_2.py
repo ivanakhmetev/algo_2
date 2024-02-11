@@ -106,7 +106,8 @@ class BST:
 
     def FinMinMax(self, FromNode, FindMax):
         if FromNode is None:
-            return BSTFind()  # Возвращаем пустой результат поиска
+            return BSTNode(None, None, None)
+            # return BSTFind()  # Возвращаем пустой результат поиска
 
         if FindMax:
             return self._FindMax(FromNode)
@@ -116,19 +117,12 @@ class BST:
     def _FindMin(self, node):
         if node.LeftChild is not None:
             return self._FindMin(node.LeftChild)
-        find = BSTFind()
-        find.Node = node
-        find.NodeHasKey = True
-        find.ToLeft = True
-        return find
+        return node
 
     def _FindMax(self, node):
         if node.RightChild is not None:
             return self._FindMax(node.RightChild)
-        find = BSTFind()
-        find.Node = node
-        find.NodeHasKey = True
-        return find 
+        return node
 
 	
     def DeleteNodeByKey(self, key):

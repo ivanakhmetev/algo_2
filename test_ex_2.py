@@ -44,7 +44,7 @@ def test_add():
 
 def test_count():
     tree = test_init()
-    assert tree.Count() == 4
+    assert tree.Count()== 4
 
 def test_finminmax():
     tree = test_init()
@@ -67,6 +67,47 @@ def test_finminmax():
     assert find.NodeKey == 3
     find = tree.FinMinMax(tree.Root.LeftChild.LeftChild, False)
     assert find.NodeKey == 1
+
+def test_delete():
+    tree = test_init()
+    assert tree.Count() == 4
+    tree.DeleteNodeByKey(1)
+    assert tree.Count() == 3
+    tree.DeleteNodeByKey(4)
+    assert tree.Count() == 2
+    tree.DeleteNodeByKey(8)
+    assert tree.Count() == 1
+    tree.DeleteNodeByKey(2)
+    assert tree.Count() == 0
+
+def test_delete_2():
+    tree = test_init()
+    assert tree.Count() == 4
+    tree.DeleteNodeByKey(8)
+    assert tree.Count() == 3
+
+def test_delete_3():
+    tree = test_init()
+    assert tree.Count() == 4
+    tree.DeleteNodeByKey(4)
+    assert tree.Count() == 3
+    tree.AddKeyValue(10, 'r1')
+    assert tree.Count() == 4
+    tree.DeleteNodeByKey(10)
+    assert tree.Count() == 3
+    tree = BST(BSTNode(8, 'root', None))
+    assert tree.Count() == 1
+    tree.DeleteNodeByKey(8)
+    assert tree.Count() == 0
+    tree.AddKeyValue(3, 'root')
+    tree.AddKeyValue(4, 'r1')
+    assert tree.Count() == 2
+    tree.DeleteNodeByKey(4)
+    assert tree.Count() == 1
+
+
+
+
 
 
 

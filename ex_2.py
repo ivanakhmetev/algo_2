@@ -143,13 +143,13 @@ class BST:
             return True
         if node == self.Root and self.HasBothChilds(node):
             min_find = self.FinMinMax(node.RightChild, False)
-            if self.IsLeaf(min_find.Node):
-                self.Root = min_find.Node
+            if self.IsLeaf(min_find):
+                self.Root = min_find
                 self.Root.Parent = None
                 return True
-            if self.HasSingleRightChild(min_find.Node):
-                min_find.Node.Parent.LeftChild = min_find.Node.RightChild
-                self.Root = min_find.Node
+            if self.HasSingleRightChild(min_find):
+                min_find.Parent.LeftChild = min_find.RightChild
+                self.Root = min_find
                 self.Root.Parent = None
                 return True
                         
@@ -173,19 +173,19 @@ class BST:
             return True
 
         min_find = self.FinMinMax(node.RightChild, False)
-        if self.IsLeaf(min_find.Node) and self.IsLeftChild(node):
-            node.Parent.LeftChild = min_find.Node
+        if self.IsLeaf(min_find) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find
             return True
-        if self.IsLeaf(min_find.Node) and self.IsRightChild(node):
-            node.Parent.RightChild = min_find.Node
+        if self.IsLeaf(min_find) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find
             return True
-        if self.HasSingleRightChild(min_find.Node) and self.IsLeftChild(node):
-            node.Parent.LeftChild = min_find.Node
-            min_find.Node.Parent.LeftChild = min_find.Node.RightChild
+        if self.HasSingleRightChild(min_find) and self.IsLeftChild(node):
+            node.Parent.LeftChild = min_find
+            min_find.Parent.LeftChild = min_find.RightChild
             return True
-        if self.HasSingleRightChild(min_find.Node) and self.IsRightChild(node):
-            node.Parent.RightChild = min_find.Node
-            min_find.Node.Parent.LeftChild = min_find.Node.RightChild
+        if self.HasSingleRightChild(min_find) and self.IsRightChild(node):
+            node.Parent.RightChild = min_find
+            min_find.Parent.LeftChild = min_find.RightChild
             return True
 
 

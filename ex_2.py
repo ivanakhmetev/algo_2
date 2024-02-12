@@ -124,70 +124,109 @@ class BST:
         if node.RightChild is not None:
             return self._FindMax(node.RightChild)
         return node
+    
+    def _DeleteNodeByKey(self, root, key):
+        if root is None:
+            return root
+        
+        if key < root.NodeKey:
+            root.LeftChild = self._DeleteNodeByKey(root.LeftChild, key)
+            if root.LeftChild is not None:
+                root.LeftChild.Parent = root
 
-	
+        elif key > root.NodeKey:
+            root.RightChild = self._DeleteNodeByKey(root.RightChild, key)
+            if root.RightChild is not None:
+                root.RightChild.Parent = root
+            
+        else:
+            if root.LeftChild is None:
+                temp = root.RightChild
+                return temp
+            
+            elif root.RightChild is None:
+                temp = root.LeftChild
+                return temp
+            
+            temp = self.FinMinMax(root.RightChild, False)
+            root.NodeKey = temp.NodeKey
+            root.NodeValue = temp.NodeValue
+            root.RightCHild = self._DeleteNodeByKey(root.RightChild, temp.NodeKey)
+        return root
+
+
     def DeleteNodeByKey(self, key):
         find = self.FindNodeByKey(key)
         if find.NodeHasKey is False:
             return False
-        node = find.Node
-        if node == self.Root and self.IsLeaf(node):
-            self.Root = None
-            return True
-        if node == self.Root and self.HasSingleLeftChild(node):
-            self.Root = node.LeftChild
-            self.Root.Parent = None
-            return True
-        if node == self.Root and self.HasSingleRightChild(node):
-            self.Root = node.RightChild
-            self.Root.Parent = None
-            return True
-        if node == self.Root and self.HasBothChilds(node):
-            min_find = self.FinMinMax(node.RightChild, False)
-            if self.IsLeaf(min_find):
-                self.Root = min_find
-                self.Root.Parent = None
-                return True
-            if self.HasSingleRightChild(min_find):
-                min_find.Parent.LeftChild = min_find.RightChild
-                self.Root = min_find
-                self.Root.Parent = None
-                return True
-                        
-        if self.IsLeaf(node) and self.IsLeftChild(node):
-            node.Parent.LeftChild = None
-            return True
-        if self.IsLeaf(node) and self.IsRightChild(node):
-            node.Parent.RightChild = None
-            return True
-        if self.HasSingleLeftChild(node) and self.IsLeftChild(node):
-            node.Parent.LeftChild = node.LeftChild
-            return True
-        if self.HasSingleLeftChild(node) and self.IsRightChild(node):
-            node.Parent.RightChild = node.LeftChild
-            return True
-        if self.HasSingleRightChild(node) and self.IsLeftChild(node):
-            node.Parent.LeftChild = node.RightChild
-            return True
-        if self.HasSingleRightChild(node) and self.IsRightChild(node):
-            node.Parent.RightChild = node.RightChild
-            return True
+        self.Root = self._DeleteNodeByKey(self.Root, key)
+        return True
 
-        min_find = self.FinMinMax(node.RightChild, False)
-        if self.IsLeaf(min_find) and self.IsLeftChild(node):
-            node.Parent.LeftChild = min_find
-            return True
-        if self.IsLeaf(min_find) and self.IsRightChild(node):
-            node.Parent.RightChild = min_find
-            return True
-        if self.HasSingleRightChild(min_find) and self.IsLeftChild(node):
-            node.Parent.LeftChild = min_find
-            min_find.Parent.LeftChild = min_find.RightChild
-            return True
-        if self.HasSingleRightChild(min_find) and self.IsRightChild(node):
-            node.Parent.RightChild = min_find
-            min_find.Parent.LeftChild = min_find.RightChild
-            return True
+
+
+	
+    # def DeleteNodeByKey(self, key):
+    #     find = self.FindNodeByKey(key)
+    #     if find.NodeHasKey is False:
+    #         return False
+    #     node = find.Node
+    #     if node == self.Root and self.IsLeaf(node):
+    #         self.Root = None
+    #         return True
+    #     if node == self.Root and self.HasSingleLeftChild(node):
+    #         self.Root = node.LeftChild
+    #         self.Root.Parent = None
+    #         return True
+    #     if node == self.Root and self.HasSingleRightChild(node):
+    #         self.Root = node.RightChild
+    #         self.Root.Parent = None
+    #         return True
+    #     if node == self.Root and self.HasBothChilds(node):
+    #         min_find = self.FinMinMax(node.RightChild, False)
+    #         if self.IsLeaf(min_find):
+    #             self.Root = min_find
+    #             self.Root.Parent = None
+    #             return True
+    #         if self.HasSingleRightChild(min_find):
+    #             min_find.Parent.LeftChild = min_find.RightChild
+    #             self.Root = min_find
+    #             self.Root.Parent = None
+    #             return True
+                        
+    #     if self.IsLeaf(node) and self.IsLeftChild(node):
+    #         node.Parent.LeftChild = None
+    #         return True
+    #     if self.IsLeaf(node) and self.IsRightChild(node):
+    #         node.Parent.RightChild = None
+    #         return True
+    #     if self.HasSingleLeftChild(node) and self.IsLeftChild(node):
+    #         node.Parent.LeftChild = node.LeftChild
+    #         return True
+    #     if self.HasSingleLeftChild(node) and self.IsRightChild(node):
+    #         node.Parent.RightChild = node.LeftChild
+    #         return True
+    #     if self.HasSingleRightChild(node) and self.IsLeftChild(node):
+    #         node.Parent.LeftChild = node.RightChild
+    #         return True
+    #     if self.HasSingleRightChild(node) and self.IsRightChild(node):
+    #         node.Parent.RightChild = node.RightChild
+    #         return True
+
+    #     min_find = self.FinMinMax(node.RightChild, False)
+    #     if self.IsLeaf(min_find) and self.IsLeftChild(node):
+    #         node.Parent.LeftChild = min_find
+    #         return True
+    #     if self.IsLeaf(min_find) and self.IsRightChild(node):
+    #         node.Parent.RightChild = min_find
+    #         return True
+    #     if self.HasSingleRightChild(min_find) and self.IsLeftChild(node):
+    #         node.Parent.LeftChild = min_find
+    #         min_find.Parent.LeftChild = min_find.RightChild
+    #         return True
+    #     if self.HasSingleRightChild(min_find) and self.IsRightChild(node):
+    #         node.Parent.RightChild = min_find
+    #         min_find.Parent.LeftChild = min_find.RightChild
+    #         return True
 
     # def DeleteNodeByKey(self, key):
     #     find = self.FindNodeByKey(key)

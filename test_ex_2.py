@@ -6,6 +6,8 @@ def test_init():
     tree.AddKeyValue(4, 'l1')
     tree.AddKeyValue(2, 'l11')
     tree.AddKeyValue(1, 'l111')
+    assert tree.Root.NodeKey == 8
+    assert tree.Root.LeftChild.NodeKey
     return tree
 
 
@@ -71,13 +73,30 @@ def test_finminmax():
 def test_delete():
     tree = test_init()
     assert tree.Count() == 4
+    print(tree.Root.NodeKey)
+    print(tree.Root.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.LeftChild.NodeKey)
     tree.DeleteNodeByKey(1)
+    print(tree.Root.NodeKey)
+    print(tree.Root.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.NodeKey)
+    # print(tree.Root.LeftChild.LeftChild.LeftChild.NodeKey)
     assert tree.Count() == 3
     tree.DeleteNodeByKey(4)
+    print(tree.Root.NodeKey)
+    print(tree.Root.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.Parent.NodeKey)
+    # print(tree.Root.LeftChild.LeftChild.LeftChild.NodeKey)
     assert tree.Count() == 2
     tree.DeleteNodeByKey(8)
+    print(tree.Root.NodeKey)
+    print(tree.Root.Parent)
+    # print(tree.Root.LeftChild.NodeKey)
+    # print(tree.Root.LeftChild.Parent.NodeKey)
     assert tree.Count() == 1
     tree.DeleteNodeByKey(2)
+    print(tree.Root)
     assert tree.Count() == 0
 
 def test_delete_2():
@@ -85,6 +104,10 @@ def test_delete_2():
     assert tree.Count() == 4
     tree.DeleteNodeByKey(8)
     assert tree.Count() == 3
+    print(tree.Root.NodeKey)
+    print(tree.Root.Parent)
+    print(tree.Root.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.NodeKey)
 
 def test_delete_3():
     tree = test_init()
@@ -105,10 +128,35 @@ def test_delete_3():
     tree.DeleteNodeByKey(4)
     assert tree.Count() == 1
 
+def test_delete_4():
+    tree = test_init()
+    find = tree.FindNodeByKey(8)
+    print(find.NodeHasKey)
+    # print(find.Node.NodeKey)
+    # print(find.Node.Parent)
+    # print(find.Node.LeftChild.NodeKey)
+    # print(find.Node.LeftChild.Parent.NodeKey)
+    tree.DeleteNodeByKey(8)
+    find = tree.FindNodeByKey(8)
+    print(find.NodeHasKey)
+    print(tree.FinMinMax(tree.Root, True).NodeKey)
+    print(tree.Root.NodeKey)
+    print(tree.Root.Parent)
+    print(tree.Root.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.Parent.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.Parent.NodeKey)
+    print(tree.Root.LeftChild.LeftChild.LeftChild)
+    # find = tree.FindNodeByKey(8)
+    # print(find.Node.NodeKey)
+    # print(find.Node.Parent)
+    # print(find.Node.LeftChild.NodeKey)
+    # print(find.Node.LeftChild.Parent.NodeKey)
 
 
 
 
 
 
-    
+# test_delete()
+test_delete_4()

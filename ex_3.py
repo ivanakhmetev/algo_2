@@ -180,7 +180,6 @@ class BST:
         return nodes
 
     def _deep_pre_order(self, current, nodes):
-        print(current.NodeKey)
         nodes += (current,)
         if current.LeftChild is not None:
             return self._deep_pre_order(current.LeftChild, nodes)

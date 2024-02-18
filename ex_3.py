@@ -189,9 +189,9 @@ class BST:
     
     def DeepAllNodes(self, param):
         if self.Root is None:
-            return ()
+            return (None,)
         if param != 1 and param != 2 and param != 3:
-            return ()
+            return (None,)
         nodes = ()
         if param == 0:
             return self._deep_in_order(self.Root, nodes)

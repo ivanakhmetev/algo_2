@@ -41,4 +41,9 @@ def test_pre_order():
         assert nodes[i].NodeKey == test_nodes[i]
 
 
+
+# test_inorder()
+# test_post_order()
+# test_pre_order()
+
         

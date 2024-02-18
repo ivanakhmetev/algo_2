@@ -163,42 +163,53 @@ class BST:
             return nodes
         return self._WideAllNodes(new_parents, nodes)
     
-    def _deep_in_order(self, current, nodes):
-        if current.LeftChild is not None:
-            return self._deep_in_order(current.LeftChild, nodes)
-        nodes += (current,)
-        if current.Parent.RightChild is not None:
-            return self._deep_in_order(current.Parent.RightChild, nodes)
-        return nodes
+    # def _deep_in_order(self, current, nodes):
+    #     if current.LeftChild is not None:
+    #         nodes += self._deep_in_order(current.LeftChild, nodes)
+    #         # return nodes
+    #     print(nodes, current)
+    #     nodes += (current,)
+    #     if current.Parent.RightChild is not None:
+    #         nodes += self._deep_in_order(current.Parent.RightChild, nodes)
+    #         return nodes
+    #     return nodes
+    
+    def _deep_in_order(self, node):
+        res = ()
+        if node is not None:
+            res += self._deep_in_order(node.LeftChild)
+            res += (node,)
+            res += self._deep_in_order(node.RightChild)
+        return res
 
-    def _deep_post_order(self, current, nodes):
-        if current.LeftChild is not None:
-            return self._deep_post_order(current.LeftChild, nodes)
-        if current.RightChild is not None:
-            return self._deep_post_order(current.RightChild, nodes)
-        nodes += (current,)
-        return nodes
+    def _deep_post_order(self, node):
+        res = ()
+        if node is not None:
+            res += self._deep_in_order(node.LeftChild)
+            res += self._deep_in_order(node.RightChild)
+            res += (node,)
+        return res
+    
+    def _deep_pre_order(self, node):
+        res = ()
+        if node is not None:
+            res += (node,)
+            res += self._deep_pre_order(node.LeftChild)
+            res += self._deep_pre_order(node.RightChild)
+        return res
 
-    def _deep_pre_order(self, current, nodes):
-        nodes += (current,)
-        if current.LeftChild is not None:
-            return self._deep_pre_order(current.LeftChild, nodes)
-        if current.RightChild is not None:
-            return self._deep_pre_order(current.RightChild, nodes)
-        return nodes
     
     def DeepAllNodes(self, param):
         if self.Root is None:
-            return (None,)
-        if param != 1 and param != 2 and param != 3:
-            return (None,)
-        nodes = ()
+            return ()
+        if param != 0 and param != 1 and param != 2:
+            return ()
         if param == 0:
-            return self._deep_in_order(self.Root, nodes)
+            return self._deep_in_order(self.Root)
         if param == 1:
-            return self._deep_post_order(self.Root, nodes)
+            return self._deep_post_order(self.Root)
         if param == 2:
-            return self._deep_pre_order(self.Root, nodes)
+            return self._deep_pre_order(self.Root)
 
 
 

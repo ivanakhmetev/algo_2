@@ -26,5 +26,19 @@ def test_inorder():
     for i in range(len(nodes)):
         assert nodes[i].NodeKey == test_nodes[i]
 
+def test_post_order():
+    tree = test_init()
+    nodes = tree.DeepAllNodes(1)
+    test_nodes = [1, 2, 4, 10 ,8]
+    for i in range(len(nodes)):
+        assert nodes[i].NodeKey == test_nodes[i]
+
+def test_pre_order():
+    tree = test_init()
+    nodes = tree.DeepAllNodes(2)
+    test_nodes = [8, 4, 2, 1, 10]
+    for i in range(len(nodes)):
+        assert nodes[i].NodeKey == test_nodes[i]
+
 
         

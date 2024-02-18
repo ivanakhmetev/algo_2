@@ -162,6 +162,37 @@ class BST:
         if len(new_parents) == 0:
             return nodes
         return self._WideAllNodes(new_parents, nodes)
+    
+    def _deep_in_order(self, current, nodes):
+        if current.LeftChild is not None:
+            return self._deep_in_order(current.LeftChild, nodes)
+        nodes += (current,)
+        if current.Parent.RightChild is not None:
+            return self._deep_in_order(current.Parent.RightChild, nodes)
+        return nodes
+
+        
+
+    def _deep_post_order(self):
+        pass
+
+    def _deep_pre_order(self):
+        pass
+    
+    def DeepAllNodes(self, param):
+        if self.Root is None:
+            return ()
+        if param != 1 and param != 2 and param != 3:
+            return ()
+        if param == 0:
+            nodes = ()
+            return self._deep_in_order(self.Root, nodes)
+        if param == 1:
+            return self._deep_post_order()
+        if param == 2:
+            return self._deep_pre_order()
+
+
 
 
         

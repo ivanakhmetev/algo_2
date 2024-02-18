@@ -19,4 +19,12 @@ def test_wide():
     for i in range(len(nodes)):
         assert nodes[i].NodeKey == test_nodes[i]
 
+def test_inorder():
+    tree = test_init()
+    nodes = tree.DeepAllNodes(0)
+    test_nodes = [1, 2, 4, 8 ,10]
+    for i in range(len(nodes)):
+        assert nodes[i].NodeKey == test_nodes[i]
+
+
         

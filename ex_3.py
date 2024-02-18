@@ -185,8 +185,8 @@ class BST:
     def _deep_post_order(self, node):
         res = ()
         if node is not None:
-            res += self._deep_in_order(node.LeftChild)
-            res += self._deep_in_order(node.RightChild)
+            res += self._deep_post_order(node.LeftChild)
+            res += self._deep_post_order(node.RightChild)
             res += (node,)
         return res
     

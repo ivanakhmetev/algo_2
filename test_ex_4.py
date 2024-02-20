@@ -73,4 +73,11 @@ def test_add():
     assert tree.FindKeyIndex(62) == 5
     assert tree.FindKeyIndex(84) == 6
     assert tree.FindKeyIndex(31) == 9
-
+    assert tree.AddKey(55) == tree.FindKeyIndex(55)
+    assert tree.AddKey(25) == tree.FindKeyIndex(25)
+    assert tree.AddKey(75) == tree.FindKeyIndex(75)
+    assert tree.AddKey(37) == tree.FindKeyIndex(37)
+    assert tree.AddKey(62) == tree.FindKeyIndex(62)
+    assert tree.AddKey(84) == tree.FindKeyIndex(84)
+    assert tree.AddKey(50) == 0
+    assert tree.AddKey(25) == 1

@@ -46,7 +46,7 @@ class aBST:
         index = self.FindKeyIndex(key)
         if index is None:
             return -1
-        if index > 0:
+        if index >= 0:
             return index
         if index < 0:
             self.Tree[-index] = key

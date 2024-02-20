@@ -81,3 +81,13 @@ def test_add():
     assert tree.AddKey(84) == tree.FindKeyIndex(84)
     assert tree.AddKey(50) == 0
     assert tree.AddKey(25) == 1
+    assert tree.AddKey(50) == 0
+
+def test_gpt():
+    a_tree = aBST(2)
+    a_tree.Tree = [10, 5, 15, 3, 8, None, None]
+    result = a_tree.AddKey(8)
+    assert result == 4
+    # print(a_tree.Tree)
+    # print(a_tree.FindKeyIndex(0))
+    # assert 1 == 0

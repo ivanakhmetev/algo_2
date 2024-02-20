@@ -1,9 +1,8 @@
 class aBST:
 
     def __init__(self, depth):
-        # правильно рассчитайте размер массива для дерева глубины depth:
         tree_size = self._get_size(0, depth)
-        self.Tree = [None] * tree_size # массив ключей
+        self.Tree = [None] * tree_size
 
     def _get_size(self, size, depth):
         lvl_size = 2 ** depth + size
@@ -11,15 +10,10 @@ class aBST:
             lvl_size = self._get_size(lvl_size, depth - 1)
         return lvl_size
         
-	
     def FindKeyIndex(self, key):
         if len(self.Tree) == 1 and self.Tree[0] is None:
             return None
-        # if len(self.Tree) == 1 and self.Tree[0] == key:
-        #     return 0
         return self._FindKeyIndex(0, key)
-        # ищем в массиве индекс ключа
-
     
     def _FindKeyIndex(self, index, key):
         if index >= len(self.Tree):
@@ -28,16 +22,12 @@ class aBST:
             return index
         if key < self.Tree[index] and not self.is_left_empty(index):
             return self._FindKeyIndex(self._get_leftchild_of(index), key)
-        # if key < self.Tree[index] and self.is_next_lvl(index) and self.is_left_empty(index):
         if key < self.Tree[index] and self.is_left_empty(index):
             return -self._get_leftchild_of(index)
         if key > self.Tree[index] and not self.is_right_empty(index):
             return self._FindKeyIndex(self._get_rightchild_of(index), key)
         if key > self.Tree[index] and self.is_right_empty(index):
             return -self._get_rightchild_of(index)
-
-
-        
 	
     def AddKey(self, key):
         if self.Tree[0] is None:
@@ -46,13 +36,17 @@ class aBST:
         index = self.FindKeyIndex(key)
         if index is None:
             return -1
-        if index >= 0:
+        if index > 0:
             return index
+        if index == 0 and self.Tree[0] is None:
+            self.Tree[index] = key
+            return index
+        if index == 0 and self.Tree[0] is not None:
+            return index
+
         if index < 0:
             self.Tree[-index] = key
             return -index
-
-        # индекс добавленного/существующего ключа или -1 если не удалось
 
     def _get_parent_of(self, idx):
         return (idx - 1) // 2

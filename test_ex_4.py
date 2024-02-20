@@ -91,3 +91,5 @@ def test_gpt():
     # print(a_tree.Tree)
     # print(a_tree.FindKeyIndex(0))
     # assert 1 == 0
+    tree = aBST(1)
+    assert tree.FindKeyIndex(3) == 0

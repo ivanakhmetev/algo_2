@@ -13,6 +13,8 @@ class aBST:
     def FindKeyIndex(self, key):
         if len(self.Tree) == 1 and self.Tree[0] is None:
             return None
+        if self.Tree[0] is None:
+            return 0
         return self._FindKeyIndex(0, key)
     
     def _FindKeyIndex(self, index, key):
@@ -20,6 +22,8 @@ class aBST:
             return None
         if key == self.Tree[index]:
             return index
+        # if self.Tree[index] is None:
+
         if key < self.Tree[index] and not self.is_left_empty(index):
             return self._FindKeyIndex(self._get_leftchild_of(index), key)
         if key < self.Tree[index] and self.is_left_empty(index):

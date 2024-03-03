@@ -5,6 +5,7 @@ class Heap:
 		
     def MakeHeap(self, a, depth):
         self.HeapArray = [None] * self._get_size(0, depth)
+        # tmp = sorted(a, reverse=True)
         list(map(self.Add, a))
         # tmp = sorted(a, reverse=True)
         # self.HeapArray[ : len(tmp)] = tmp

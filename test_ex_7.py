@@ -9,13 +9,15 @@ def test_init():
 def test_getmax():
     a = Heap()
     a.MakeHeap([11,9,4,3,1,7,8,2,5,6,], 3)
-    assert a.HeapArray[:7] == [11,9,8,7,6,5,4]
+    assert a.HeapArray == [11, 6, 9, None, 5, 8, 4, None, None, None, None, 2, 7, 1, 3]  
     max = a.GetMax()
     assert max == 11
-    assert a.HeapArray[:9] == [9, 7, 8, 3, 6, 5, 4, 1, 2]
+    assert a.HeapArray ==  [9, 6, 8, None, 5, 7, 4, None, None, None, None, 2, 3, 1, None]
 
 def test_add():
     a = Heap()
     a.MakeHeap([1,2,3,4], 2)
     a.Add(5)
-    assert a.HeapArray ==  [5, 3, 4, 1, None, None, 2]
+    assert a.HeapArray == [5, 4, 3, None, None, 2, 1]  
+
+# test_init()

@@ -5,8 +5,9 @@ class Heap:
 		
     def MakeHeap(self, a, depth):
         self.HeapArray = [None] * self._get_size(0, depth)
-        tmp = sorted(a, reverse=True)
-        self.HeapArray[ : len(tmp)] = tmp
+        list(map(self.Add, a))
+        # tmp = sorted(a, reverse=True)
+        # self.HeapArray[ : len(tmp)] = tmp
 
     def GetMax(self):
         if len(self.HeapArray) == 0:
@@ -15,6 +16,7 @@ class Heap:
         last_idx = self._find_last_existing()
         self._switch(0, last_idx)
         self._GetMax(0)
+        self.HeapArray[last_idx] = None
         return max_val
     
     def _GetMax(self, parent_idx):
@@ -91,6 +93,8 @@ class Heap:
         if child_idx == 0:
             return False
         parent = self._get_parent_of(child_idx)
+        if self.HeapArray[parent] is None:
+            return True
         if self.HeapArray[parent] > self.HeapArray[child_idx]:
             return False
         return True

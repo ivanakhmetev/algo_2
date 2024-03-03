@@ -34,7 +34,6 @@ class Heap:
         parent = self._get_parent_of(child_idx)
         if self._is_upward_need(child_idx):
             self._switch(child_idx, parent)
-            print(self.HeapArray)
             self._Add(parent)
 
 

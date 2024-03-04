@@ -27,11 +27,14 @@ class Heap:
             self._GetMax(child_to_switch)
 
     def Add(self, key):
-        last_none = self._find_last_none()
-        if last_none == -1:
-	        return False
-        self.HeapArray[last_none] = key
-        self._Add(last_none)
+        # last_none = self._find_last_none()
+        # if last_none == -1:
+	    #     return False
+        first_none = self._find_first_none()
+        if first_none == -1:
+            return False
+        self.HeapArray[first_none] = key
+        self._Add(first_none)
 
     def _Add(self, child_idx):
         parent = self._get_parent_of(child_idx)
@@ -54,6 +57,12 @@ class Heap:
     
     def _find_last_none(self):
         for i in range(len(self.HeapArray) - 1, -1, -1):
+            if self.HeapArray[i] is None:
+                return i
+        return -1
+    
+    def _find_first_none(self):
+        for i in range(len(self.HeapArray)):
             if self.HeapArray[i] is None:
                 return i
         return -1

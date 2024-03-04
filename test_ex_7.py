@@ -4,7 +4,7 @@ from ex_7 import Heap
 def test_init():
     a = Heap()
     a.MakeHeap([1,2,3], 1)
-    assert a.HeapArray == [3, 2, 1]
+    assert a.HeapArray == [3, 1, 2]
 
 def test_getmax():
     a = Heap()
@@ -19,5 +19,10 @@ def test_add():
     a.MakeHeap([1,2,3,4], 2)
     a.Add(5)
     assert a.HeapArray ==  [5, 4, 3, None, None, 2, 1]
+
+def test_bobrobski():
+    a = Heap()
+    a.MakeHeap([110, 90,40, 70,80, 30,10, 20,50, 60,65, 31,29, 11,9] ,3)
+    assert a.HeapArray == [110, 90,40, 70,80, 31,11, 20,50, 60,65, 30,29, 10,9]
 
 # test_init()

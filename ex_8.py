@@ -21,7 +21,7 @@ class SimpleGraph:
         self.vertex[v] = None
 
     def IsEdge(self, v1, v2):
-        return bool(self.m_adjacency[v1, v2])
+        return bool(self.m_adjacency[v1] [v2])
 
     def AddEdge(self, v1, v2):
         self.m_adjacency[v1] [v2] = 1

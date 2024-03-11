@@ -1,5 +1,3 @@
-'''algo_2 ex_1 general tree implementation'''
-
 class SimpleTreeNode:
 
     def __init__(self, val, parent):
@@ -34,7 +32,7 @@ class SimpleTree:
             all_nodes = self._GetAllNodes(all_nodes, nodes)
         return all_nodes
     
-    def _GetAllNodes(self, all_nodes: int, nodes: list):
+    def _GetAllNodes(self, all_nodes, nodes):
         for n in nodes:
             num_children = len(n.Children)
             if num_children > 0:
@@ -45,7 +43,6 @@ class SimpleTree:
 
 
     def FindNodesByValue(self, val):
-        # ваш код поиска узлов по значению
         found = []
         found = self._FindNodesByValue(found, [self.Root], val)
         return found
@@ -64,7 +61,6 @@ class SimpleTree:
         self.AddChild(NewParent, OriginalNode)
    
     def Count(self):
-        # количество всех узлов в дереве
         count = 1
         nodes = self.Root.Children
         if len(nodes) > 0:
@@ -72,7 +68,7 @@ class SimpleTree:
             count = self._Count(count, nodes)
         return count
     
-    def _Count(self, count: int, nodes: list):
+    def _Count(self, count, nodes):
         for n in nodes:
             num_children = len(n.Children)
             if num_children > 0:
@@ -81,7 +77,6 @@ class SimpleTree:
         return count
 
     def LeafCount(self):
-        # количество листьев в дереве
         nodes = self.Root.Children
         if len(nodes) == 0:
             return 1
@@ -89,32 +84,29 @@ class SimpleTree:
             leaf_count = self._LeafCount(0, nodes)
         return leaf_count
     
-    def _LeafCount(self, leaf_count: int, nodes: list):
+    def _LeafCount(self, leaf_count, nodes):
         for n in nodes:
             if len(n.Children) == 0:
                 leaf_count += 1
             if len(n.Children) > 0:
                 leaf_count = self._LeafCount(leaf_count, n.Children)
         return leaf_count
-       
-  
-    def _NodeCount(self):
-        return self.LeafCount() + self.Count()
-    
-    def IsEven(self):
-        count = self.Count()
-        return count % 2 == 0 and count != 0
     
     def EvenTrees(self):
-        vertex = []
-        for el in self.Root.Children:
-            self._EvenTrees(el, vertex)
-
-        return vertex
+        to_remove = []
+        self._EvenTrees(self.Root, to_remove)
+        return to_remove
     
-    def _EvenTrees(self, node, vertex):
-        if SimpleTree(node).IsEven():
-            vertex.append(node.Parent.NodeValue)
-            vertex.append(node.NodeValue)
-            for el in node.Children:
-                self._EvenTrees(el, vertex)
+    def _EvenTrees(self, node, to_remove ):
+        for child in node.Children:
+            child.Parent = None
+            subtree = SimpleTree(child)
+            if subtree.IsEven():
+                to_remove.append(node)
+                to_remove.append(child)
+                self._EvenTrees(child, to_remove)
+    
+    def IsEven(self):
+        return self.Count() % 2  == 0 and self.Count() != 0
+
+

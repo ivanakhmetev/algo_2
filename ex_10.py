@@ -56,7 +56,7 @@ class SimpleGraph:
         self.stack = Stack()
         self.SetUnhit()
         self.step_1(VFrom, VTo)
-        return self.stack.stack
+        return [self.vertex[i] for i in self.stack.stack]
 
 
     def step_1(self, current, VTo):

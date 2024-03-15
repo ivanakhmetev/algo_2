@@ -85,9 +85,9 @@ class SimpleGraph:
             if len(unvisit_neighbours) == 0:
                 # print('len')
                 self.stack.pop()
-                if len(self.stack) == 0:
+                if self.stack.len() == 0:
                     return []
-                if len(self.stack) != 0:
+                if self.stack.len() != 0:
                     new_current = self.stack.pop()
                     self.step_1(new_current, VTo)
 

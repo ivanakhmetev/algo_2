@@ -237,7 +237,10 @@ class SimpleGraph:
                         # print('con')
                         # neighbours.insert(j, current)
                         break
+                
                 neighbours.insert(j, current)
+                if connect is True:
+                    break
             if connect is False:
                 # print('fal')
                 # neighbours.insert(j, current)

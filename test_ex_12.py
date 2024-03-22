@@ -54,11 +54,48 @@ def init_graph():
     g.AddEdge(3, 3)
     return g
 
-g = init_graph()
+def init_2():
+    g = SimpleGraph(9)
+    a = Vertex('a')
+    b = Vertex('b')
+    c = Vertex('c')
+    d = Vertex('d')
+    e = Vertex('e')
+    b1 = Vertex('b1')
+    c1 = Vertex('c1')
+    d1 = Vertex('d1')
+    e1 = Vertex('e1')
+    g.AddVertex(a)
+    g.AddVertex(b)
+    g.AddVertex(c)
+    g.AddVertex(d)
+    g.AddVertex(e)
+    g.AddVertex(b1)
+    g.AddVertex(c1)
+    g.AddVertex(d1)
+    g.AddVertex(e1)
+    g.AddEdge(0, 1)
+    g.AddEdge(0, 2)
+    g.AddEdge(1, 2)
+    g.AddEdge(1, 3)
+    g.AddEdge(2, 3)
+    g.AddEdge(3, 4  )
+    g.AddEdge(4, 5)
+    g.AddEdge(2, 5)
+    g.AddEdge(5, 6)
+    g.AddEdge(5, 7)
+    g.AddEdge(6, 7)
+    g.AddEdge(7, 8)
+    return g
+
+
+g = init_2()
 # print(g.BreadthFirstSearch(0, 4))
-print(g.WeakVertices())
+# print(g.WeakVertices())
 # for el in a.m_adjacency:
 #     print(el)
-
+b = g.WeakVertices()
+for el in b:
+    print(el.Value.Value)
 # print(a.DepthFirstSearch(4,1))
 

@@ -55,7 +55,10 @@ def init_graph():
     return g
 
 g = init_graph()
-print(g.BreadthFirstSearch(0, 4))
+v = g.BreadthFirstSearch(2, 4)
+for el in v:
+    print(el.Value.Value)
+# print(g.)
 # for el in a.m_adjacency:
 #     print(el)
 

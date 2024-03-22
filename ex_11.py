@@ -31,12 +31,15 @@ class Queue:
         return self.s2.pop()
     
     def size(self):
+        # print('size call', self.s1.stack, 'lens1', len(self.s1.stack), self.s2.stack, 'lens2', len(self.s2.stack))
         if self.s1.len() == 0 and self.s2.len() == 0:
             return 0
         if self.s1.len() == 0 and self.s2.len() != 0:
             return self.s2.len()
         if self.s1.len() != 0 and self.s2.len() == 0:
             return self.s1.len()
+        if self.s1.len() != 0 and self.s2.len() != 0:
+            return self.s1.len() + self.s2.len()
         
 
 
@@ -168,23 +171,33 @@ class SimpleGraph:
         
     def BreadthFirstSearch(self, VFrom, VTo):
         # path = []
+        if VFrom == VTo and self.m_adjacency[VFrom][VTo] == 1:
+            return [self.vertex[VFrom], self.vertex[VTo]]
         self.queue = Queue()
         self.SetUnhit()
 
 
-        self.vertex[VFrom].Hit = True
+        # self.vertex[VFrom].Hit = True
         self.queue.enqueue([VFrom])
         # path.append(VFrom)
-        while self.queue.size() is not None:
+        while self.queue.size() != 0:
             path = self.queue.dequeue()
+            # print('path', path)
             current = path[-1]
+            self.vertex[current].Hit = True
             adjacency = self.m_adjacency[current]
             unvisit_neighbours = [i for i in range(len(adjacency)) if self.vertex[i].Hit is False and adjacency[i] == 1]
-
+            # print('unv', unvisit_neighbours)
             for el in unvisit_neighbours:
                 new_path = list(path)
+                # new_path = path
                 new_path.append(el)
+                # print('new', new_path)
+                # print(self.queue.size(), 'sz')
+                # print('bilo')
                 self.queue.enqueue(new_path)
+                # print(self.queue.size(), 'sz')
+                # print('stalo')
                 if el == VTo:
                     return [self.vertex[i] for i in new_path]
                     
